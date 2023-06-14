@@ -9,7 +9,6 @@ import TBlock from "@/components/base/block/TBlock.vue";
 import TDrawer from "@/components/base/drawer/TDrawer.vue";
 import TInput from "@/components/base/input/TInput.vue";
 import TModal from "@/components/base/modal/TModal.vue";
-import TSelect from "@/components/base/select/TSelect.vue";
 import {useGroupStore} from "@/stores/group";
 import {useRoomStore} from "@/stores/room";
 import type {RoomDto} from "@/api/rooms/dto";
@@ -18,7 +17,6 @@ import type {EventDto} from "@/api/events/dto";
 import TLoader from "@/components/base/loader/TLoader.vue";
 import {OhVueIcon} from "oh-vue-icons";
 import { CoClock } from "oh-vue-icons/icons";
-import TExpandList from "@/components/base/expand-list/TExpandList.vue";
 
 // refs & vars
 const usersStore = useUserStore()
@@ -102,7 +100,7 @@ onMounted(() => {
         </div>
         <div class="font-bold text-gray-700 mt-3" style="font-size: 17px">
           <span>Комната:</span>
-          <span class="ml-2">{{ report.room.name }}</span>
+          <span class="ml-2">{{ report?.room?.name }}</span>
         </div>
       </div>
       <div class="flex">
@@ -115,7 +113,7 @@ onMounted(() => {
           <span class="ml-1">{{ report.startTime }} - {{ report.endTime}}</span>
         </div>
       </div>
-      <div class="mt-5" v-if="report.users.length">
+      <div class="mt-5" v-if="report?.users?.length">
         <div class="px-5 flex font-bold text-gray-500">
           <p class="w-full">Имя</p>
           <p class="w-full">Опоздание</p>

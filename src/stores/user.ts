@@ -7,7 +7,7 @@ import {useRoomStore} from "@/stores/room";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
-    user: {} as UserDto | null,
+    user: {} as UserDto,
     isLoading: false,
   }),
 
@@ -51,7 +51,7 @@ export const useUserStore = defineStore("user", {
     async deleteUser(userId: number) {
       try {
         const deletedUser = await usersApi.delete(userId);
-        this.user = null;
+        this.user = {};
       } catch (error) {
         console.error("Произошла ошибка при удалении пользователя:", error);
       }

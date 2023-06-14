@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 
 export const useEventsStore = defineStore("events", {
   state: () => ({
-    event: {} as EventDto | null,
+    event: {} as EventDto,
     events: [] as EventDto[],
     reports: [] as EventDto[],
     report: {} as EventDto,

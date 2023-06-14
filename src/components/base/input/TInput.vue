@@ -6,15 +6,14 @@
       class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
       :type="type"
       :placeholder="placeholder"
-      :value="modelValue"
+      v-model="inputValue"
       :min="inputMin"
       :max="max"
-      @input="$emit('update:modelValue', $event.target.value)"
     />
   </div>
 </template>
 <script setup lang="ts">
-import { computed } from 'vue';
+import {computed, ref, toRefs, watch} from 'vue';
 import dayjs from "dayjs";
 
 // props & emits
@@ -40,6 +39,9 @@ const props = withDefaults(defineProps<TInputProps>(), {
   disablePast: false,
 })
 
+const emit = defineEmits(['update:modelValue'])
+
+const inputValue = ref('')
 // computed
 const containerClasses = computed(() => [
     props.dir === 'column' ? 'flex-col' : 'flex-row  items-center',
@@ -57,4 +59,22 @@ const inputMin = computed(() => {
   }
   return ''
 })
+
+// methods
+
+
+// hooks
+watch(
+    () => props.modelValue,
+    (newValue) => {
+      inputValue.value = newValue;
+    }
+);
+
+watch(
+    inputValue,
+    (newValue) => {
+      emit('update:modelValue', newValue);
+    }
+);
 </script>

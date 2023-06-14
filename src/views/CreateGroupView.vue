@@ -31,7 +31,7 @@ const signinUser = async () => {
 
   group.value!.owner = user.value?.id
 
-  await groupsStore.udpate(group.value!.id!, groupData!)
+  await groupsStore.udpate(group.value!.id!, group.value!)
   await router.push({ name: 'main' })
 }
 

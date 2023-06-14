@@ -121,7 +121,7 @@ onMounted(() => {
         <TButton @click="saveRoom">Сохранить</TButton>
       </div>
       <div class="mt-2">
-        <TInput placeholder="Кабинет 304" v-model="room.name" />
+        <TInput placeholder="Кабинет 304" v-if="room" v-model="room.name" />
       </div>
     </div>
     <div class="mt-5" v-if="!isNew">
@@ -144,7 +144,7 @@ onMounted(() => {
             <div class="w-full">
               <div class="flex justify-between">
                 <p class="font-bold">{{ event.startTime}} - {{ event.endTime}}</p>
-                <div class="rounded-full bg-red-300 w-6 h-6 flex items-center justify-center cursor-pointer hover:bg-red-600 ml-4" @click="deleteEvent(event.id)">
+                <div class="rounded-full bg-red-300 w-6 h-6 flex items-center justify-center cursor-pointer hover:bg-red-600 ml-4" v-if="event.id" @click="deleteEvent(event.id)">
                   <span class="font-bold text-white" style="font-size: 10px; margin-bottom: 3px">╳</span>
                 </div>
               </div>

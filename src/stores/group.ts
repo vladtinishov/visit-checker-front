@@ -4,7 +4,7 @@ import type {FindCriteriaDto, GroupDto} from "@/api/groups/dto";
 
 export const useGroupStore = defineStore("group", {
   state: () => ({
-    group: {} as GroupDto | null,
+    group: {} as GroupDto,
     groups: [] as GroupDto[],
     isLoading: false as boolean,
   }),
@@ -66,7 +66,7 @@ export const useGroupStore = defineStore("group", {
     async delete(id: number) {
       try {
         await groupsApi.delete(id);
-        this.group = null;
+        this.group = {};
       } catch (error) {
         console.error("Произошла ошибка при удалении:", error);
       }

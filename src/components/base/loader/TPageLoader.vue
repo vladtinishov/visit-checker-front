@@ -18,6 +18,6 @@
 }
 
 </style>
-<script setup>
+<script setup lang="ts">
 import TLoader from "@/components/base/loader/TLoader.vue";
 </script>

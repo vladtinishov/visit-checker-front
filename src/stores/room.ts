@@ -4,6 +4,7 @@ import type { FindCriteriaDto, RoomDto } from "@/api/rooms/dto";
 import dayjs from "dayjs";
 
 export interface PreparedEvent {
+  id: number,
   roomName: string,
   date: string,
   time: string,
@@ -24,7 +25,7 @@ export const useRoomStore = defineStore("room", {
       state.rooms.forEach(room => {
         const preparedEvents = room.events
           ?.map(event => ({
-            id: event.id,
+            id: event.id!,
             roomName: room.name || '',
             date: event.date  || '',
             time: event.startTime || '00:00'

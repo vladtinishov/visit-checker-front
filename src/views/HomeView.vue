@@ -3,6 +3,11 @@ import TSection from "@/components/base/section/TSection.vue";
 import TButton from "@/components/base/button/TButton.vue";
 import { onMounted } from "vue";
 import {storeToRefs} from "pinia";
+import {useUserStore} from "@/stores/user";
+import {useRouter} from "vue-router";
+
+const usersStore = useUserStore()
+const router = useRouter()
 const { user } = storeToRefs(usersStore)
 // hooks
 onMounted(() => {
