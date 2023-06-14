@@ -13,7 +13,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import {computed, ref, toRefs, watch} from 'vue';
+import {computed, ref, toRefs, watch, onMounted } from 'vue';
 import dayjs from "dayjs";
 
 // props & emits
@@ -77,4 +77,8 @@ watch(
       emit('update:modelValue', newValue);
     }
 );
+
+onMounted(() => {
+  inputValue.value = props.modelValue
+})
 </script>

@@ -24,7 +24,7 @@ const eventStore = useEventsStore()
 
 const router = useRouter()
 
-const { user } = storeToRefs(usersStore)
+const { user, isAdmin } = storeToRefs(usersStore)
 const { group } = storeToRefs(groupsStore)
 const { room, rooms, isNew } = storeToRefs(roomsStore)
 const { event, events, isLoading: isEventsLoading } = storeToRefs(eventStore)
@@ -92,7 +92,7 @@ onMounted(() => {
   <TSection>
     <div class="flex justify-between items-center">
       <h1 class="text-3xl font-bold text-gray-800">Комнаты</h1>
-      <TButton @click="openForm">Создать</TButton>
+      <TButton @click="openForm" v-if="isAdmin">Создать</TButton>
     </div>
     <div>
       <div class="mt-4" v-if="rooms.length">
@@ -102,7 +102,7 @@ onMounted(() => {
               {{ room.name }}
             </div>
             <div class="text-gray-500 cursor-pointer" @click="openForm(room)">
-              Изменить
+              Просмотр
             </div>
           </div>
         </TBlock>
@@ -118,7 +118,7 @@ onMounted(() => {
       </div>
       <div class="flex items-center justify-between" v-else>
         <h1 class="text-2xl font-bold">Редактирование</h1>
-        <TButton @click="saveRoom">Сохранить</TButton>
+        <TButton @click="saveRoom" v-if="isAdmin">Сохранить</TButton>
       </div>
       <div class="mt-2">
         <TInput placeholder="Кабинет 304" v-if="room" v-model="room.name" />
@@ -126,7 +126,7 @@ onMounted(() => {
     </div>
     <div class="mt-5" v-if="!isNew">
       <h1 class="text-xl font-bold">События:</h1>
-      <TButton color="light" class="mt-4" @click="openModal">Создать</TButton>
+      <TButton color="light" class="mt-4" @click="openModal" v-if="isAdmin">Создать</TButton>
       <div class="mt-5" v-if="events.length">
         <div class="px-5 flex font-bold text-gray-500">
           <p class="w-full">Название</p>
@@ -144,7 +144,7 @@ onMounted(() => {
             <div class="w-full">
               <div class="flex justify-between">
                 <p class="font-bold">{{ event.startTime}} - {{ event.endTime}}</p>
-                <div class="rounded-full bg-red-300 w-6 h-6 flex items-center justify-center cursor-pointer hover:bg-red-600 ml-4" v-if="event.id" @click="deleteEvent(event.id)">
+                <div class="rounded-full bg-red-300 w-6 h-6 flex items-center justify-center cursor-pointer hover:bg-red-600 ml-4" v-if="event.id && isAdmin" @click="deleteEvent(event.id)">
                   <span class="font-bold text-white" style="font-size: 10px; margin-bottom: 3px">╳</span>
                 </div>
               </div>

@@ -11,6 +11,14 @@ export const useUserStore = defineStore("user", {
     isLoading: false,
   }),
 
+  getters: {
+    isAdmin: (state) => {
+      const group = useGroupStore().group
+      if (!state.user?.id) return false
+      return state.user.id === group?.owner
+    }
+  },
+
   actions: {
     async initAll() {
       const groupId = this.user!.groupId!

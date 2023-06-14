@@ -4,24 +4,16 @@ import LogoComponent from "@/components/Logo/LogoComponent.vue";
 import TButton from "@/components/base/button/TButton.vue";
 import {useRoute} from "vue-router";
 import {computed} from "vue";
-import {useGroupStore} from "@/stores/group";
 import {useUserStore} from "@/stores/user";
 import {storeToRefs} from "pinia";
 
 const route = useRoute()
-const groupStore = useGroupStore()
 const userStore = useUserStore()
 
-const { group } = storeToRefs(groupStore)
-const { user } = storeToRefs(userStore)
+const { isAdmin } = storeToRefs(userStore)
 
 // computed
-const canShowButtons = computed(() => route.name === 'home')
-
-const isAdmin = computed(() => {
-  if (!user.value?.id) return false
-  return user.value.id === group.value?.owner
-})
+const canShowButtons = computed(() => ['home', 'login', 'signin'].includes(route?.name?.toString() || ''))
 </script>
 
 <template>
@@ -39,7 +31,7 @@ const isAdmin = computed(() => {
               stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
               d="M4 6h16M4 12h16M4 18h16"></path></svg></span></button>
         </div>
-        <div class="hidden lg:flex lg:ml-12 lg:items-center lg:justify-center lg:space-x-6 xl:space-x-6">
+        <div class="hidden lg:flex lg:ml-12 lg:items-center lg:justify-center lg:space-x-6 xl:space-x-6" v-if="!canShowButtons">
           <RouterLink :to="{ name: 'main' }">
             <span title="" class="text-base font-bold text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50">
               Главная
@@ -57,11 +49,11 @@ const isAdmin = computed(() => {
           </RouterLink>
         </div>
         <div class="hidden lg:ml-auto lg:flex lg:items-center lg:space-x-6">
-          <TButton v-if="canShowButtons">
-            Sign up
+          <TButton :to="{ name: 'signin' }" v-if="canShowButtons">
+            Регистрация
           </TButton>
-          <TButton color="light" v-if="canShowButtons">
-            Sign in
+          <TButton :to="{ name: 'login' }" color="light" v-if="canShowButtons">
+            Вход
           </TButton>
         </div>
       </div>
