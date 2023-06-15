@@ -21,7 +21,7 @@ export interface TInputProps {
   dir?: 'row'|'column',
   placeholder?: string,
   label?: string,
-  type?: 'text' | 'email' | 'password' | 'date' | 'time',
+  type?: 'text' | 'email' | 'password' | 'date' | 'time' | 'file',
   modelValue?: string,
   min?: any,
   max?: any,

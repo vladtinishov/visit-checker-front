@@ -22,11 +22,6 @@ const { group } = storeToRefs(groupsStore)
 const { allEvents, date } = storeToRefs(roomStore)
 
 // computed
-const eventsOnDate = computed(() => {
-  console.log(allEvents.value, allEvents.value, date.value)
-  return allEvents.value
-})
-
 const eventClasses = computed(() => (date: string, time: string) => {
   return isPast(`${date} ${time}`) ? 'bg-red-100' : 'bg-blue-100'
 })

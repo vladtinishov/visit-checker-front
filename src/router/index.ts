@@ -11,6 +11,7 @@ import RoomsListView from "@/views/RoomsListView.vue";
 import LoginView from "@/views/LoginView.vue";
 // @ts-ignore
 import ReportsView from "@/views/ReportsView.vue";
+import UserPageView from "@/views/UserPageView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +45,11 @@ const router = createRouter({
       path: '/reports',
       name: 'reports',
       component: ReportsView
+    },
+    {
+      path: '/user',
+      name: 'user',
+      component: UserPageView
     },
   ]
 })

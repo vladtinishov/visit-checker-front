@@ -4,6 +4,7 @@ import type {UserDto} from "@/api/users/dto";
 import {useRouter} from "vue-router";
 import {useGroupStore} from "@/stores/group";
 import {useRoomStore} from "@/stores/room";
+import { filesApi } from "@/api/files";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
@@ -74,6 +75,19 @@ export const useUserStore = defineStore("user", {
         await this.initAll()
       } catch (error) {
         console.error("Произошла ошибка при удалении пользователя:", error);
+      } finally {
+        this.isLoading = false
+      }
+    },
+
+    async sendPhoto(dto: FormData) {
+      try {
+        this.isLoading = true
+        dto.append('data', JSON.stringify(this.user))
+        await filesApi.create(dto);
+        
+      } catch (e) {
+        console.error(e)
       } finally {
         this.isLoading = false
       }
